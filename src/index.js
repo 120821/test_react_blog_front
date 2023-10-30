@@ -6,7 +6,9 @@ import { Provider } from 'react-redux';
 import { rootReducer } from './reducers';
 import Page1 from './components/Page1';
 import Page2 from './components/Page2';
-import App from './App';
+//import App from './App';
+import Blogs from './Blogs';
+import Blog from './Blog';
 import Home from './Home';
 import About from './About';
 import Hi from './Hi';
@@ -19,7 +21,8 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<Blogs />} />
+        <Route path="/blog" element={<Blog />} />
         <Route path="/about" element={<About />} />
         <Route path="/hi" element={<Hi />} />
         <Route path="/home" element={<Home />} />
