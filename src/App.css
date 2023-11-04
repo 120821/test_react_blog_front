@@ -69,6 +69,7 @@
 
 
 .blogs-page {
+  display: flex;
   margin: 0 auto;
   padding: 16px;
   background-image: url('friends.jpeg');
@@ -99,9 +100,42 @@
   overflow: auto;
 }
 
+.home-link {
+  margin-left: 12%;
+  color: snow;
+}
+
 .container-left {
   height: 100%;
   width: 200px;
+  margin-left: 5%;
+}
+
+.card a {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  color: snow;
+  padding: 3px;
+  color: grey;
+}
+
+.card-link-div {
+  margin-top: 10px;
+}
+
+.card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,0.125);
+  border-radius: .25rem;
 }
 
 .blog-list-title-simple {

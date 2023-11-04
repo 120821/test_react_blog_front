@@ -19,7 +19,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <>
         <Link to='/page1'>page 1</Link>
         <Countdown />
         <Link to='/page2'>page 2</Link>
@@ -37,7 +37,7 @@ class App extends Component {
             Learn React {this.state.count}
           </a>
         </header>
-      </div>
+      </>
     );
   }
 }
