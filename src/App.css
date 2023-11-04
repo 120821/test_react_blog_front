@@ -1,4 +1,11 @@
+body {
+  background-image: url('friends.jpeg');
+  height: 100%;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
 
+}
 /* blog-show */
 .created_at {
   width: 80%;
@@ -31,7 +38,6 @@
 .blog-page {
   margin: 0 auto;
   padding: 16px;
-  background-image: url('friends.jpeg');
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
@@ -72,7 +78,7 @@
   display: flex;
   margin: 0 auto;
   padding: 16px;
-  background-image: url('friends.jpeg');
+  /*background-image: url('friends.jpeg');*/
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;

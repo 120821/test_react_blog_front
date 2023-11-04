@@ -14,7 +14,7 @@ class BlogsCard extends Component {
         </div>
         <div className="container-left">
           <div className="card">
-            <img src={HeadImage} alt="Head Image" style={{ borderRadius: '50%'}}/>
+            <img src={HeadImage} alt="Head-Img" style={{ borderRadius: '50%'}}/>
             <div className="card-link-div">
               <Link to="https://blog.csdn.net/m0_67038390?type=blog" target="_blank">CSDN 地址</Link>
               <Link to="https://github.com/120821" target="_blank">GitHub 地址</Link>
