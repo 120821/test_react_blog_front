@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Pagination, Table, Space, Button} from 'antd';
-import { EyeOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+//import { EyeOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import './App.css';
 
@@ -56,16 +57,10 @@ class Blogs extends Component {
       if (response.statusText === "OK") {
         this.setState(
           {
-            //key: response.id,
-            //id: response.blogs.id,
             data: jsonObject.blogs,
             loading: false,
-            //totalPages: response.blogs.totalPages,
-            //totalCount: response.blogs.totalCount,
           },
           () => {
-            //console.log("== setState, totalPages: ", this.state.totalPages);
-            //console.log("== setState, totalCount: ", this.state.totalCount);
             this.render();
           }
         );
@@ -103,31 +98,25 @@ class Blogs extends Component {
     window.location.href = newUrl
   };
 
-
   render() {
     const { data, loading, currentPage,totalCount } = this.state;
 
+    console.info("== data: ", data)
     return (
-      <div className="App">
-        <Table style={{marginTop: '20px'}} columns={[
-          ...columns,
-          {
-            title: '操作',
-            key: 'action',
-            render: (text, record) => (
-              <Space size="middle">
-                <Button onClick={() => this.handleShowClick(record.id)}>
-                  <EyeOutlined />
-                  查看
-                </Button>
-              </Space>
-            ),
-          },
-        ]}
-        dataSource={data}
-        loading={loading}
-        pagination={false}
-        rowKey={(record) => record.id} />
+      <div className="blogs-page">
+
+        <div className="list-blog">
+          {data.map(item => (
+            <div key={item.id} className="blog-list-title-simple">
+              <Link className="a-link" target="_blank" to="/">
+                {new Date(item.created_at).toLocaleString().slice(0, -3).replace('/', '-').replace('/', '-')}
+                {'   '}
+                {item.title}
+              </Link>
+            </div>
+          ))}
+        </div>
+
         <div style={{ float: 'right', marginTop: '20px' }}>
           <Pagination
             current={currentPage}
