@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
+//import backgroundImage from './friends.jpeg';
+//import { Space, Button} from 'antd';
+//import { LeftSquareOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import RawHtmlComponent from './RawHtmlComponent';
 import './App.css';
 
 class Blog extends Component {
@@ -14,17 +18,18 @@ class Blog extends Component {
       loading: true,
     };
   }
-  async fetchData(page = 1) {
+  componentDidMount() {
+    this.fetchData()
+  }
+  async fetchData() {
+    console.info("======== fetchData")
     try {
-      const searchParams = new URLSearchParams(window.location.search);
-      const id = searchParams.get('id');
-      console.info(id);
-      const response = await axios.get(`https://admin.linlin.fun/api/v1/blogs/${id}`, { headers: { 'Access-Control-Allow-Origin': '*' } })
-      console.info("== response..: ", response)
-      console.info("== response.blogs.: ", response.blogs)
+      const pathname = window.location.href;
+      const id = pathname.split('/').pop();
+      let url = "https://admin.linlin.fun/api/v1/blogs/" + id
+      const response = await axios.get(url, { headers: { 'Access-Control-Allow-Origin': '*' } })
       let responseData = response.request.response
       const jsonObject = JSON.parse(responseData);
-      console.info("== jsonObject: ", jsonObject)
 
       if (response.statusText === "OK") {
         this.setState(
@@ -45,18 +50,28 @@ class Blog extends Component {
       console.error(error)
     }
   }
+  handleListClick = async () => {
+    const newUrl = "/blogs"
+    window.location.href = newUrl
+  };
 
+  //<Button onClick={() => this.handleShowClick()}>
+  //  <LeftSquareOutlined />
+  //   返回
+  //</Button>
   render() {
     const { title, content, created_at } = this.state;
-    console.info("== title: ", title)
-    console.info("== content: ", content)
-    console.info("== created_at: ", created_at)
 
     return (
-      <div className="App">
-        {title}
-        {content}
-        {created_at}
+      <div className="blog-page">
+        <div className="show-blog">
+          <Link className="a-link" to="/">返回</Link>
+          <div className="title">{title}</div>
+          <div className="created_at">{created_at}</div>
+          <div className="content">
+            <RawHtmlComponent rawHtml={content} />
+          </div>
+        </div>
       </div>
     );
   }

@@ -22,7 +22,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Blogs />} />
-        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<Blog />} />
         <Route path="/about" element={<About />} />
         <Route path="/hi" element={<Hi />} />
         <Route path="/home" element={<Home />} />

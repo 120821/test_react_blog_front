@@ -99,7 +99,7 @@ class Blogs extends Component {
   }
 
   handleShowClick = async (id) => {
-    const newUrl = "/blog?id=" + id
+    const newUrl = "/blog/" + id
     window.location.href = newUrl
   };
 
