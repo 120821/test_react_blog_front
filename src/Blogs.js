@@ -90,7 +90,7 @@ class Blogs extends Component {
           </div>
           {data.map(item => (
             <div key={item.id} className="blog-list-title-simple">
-              <Link className="a-link" target="_blank" to="/">
+              <Link className="a-link" target="_blank" to={`/blog/${item.id}`}>
                 {new Date(item.created_at).toLocaleString().slice(0, -3).replace('/', '-').replace('/', '-')}
                 {'   '}
                 {item.title}
