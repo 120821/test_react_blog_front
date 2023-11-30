@@ -10,7 +10,11 @@ class Blogs extends Component {
     super(props);
     this.state = {
       data: [],
+      title: null,
+      content: null,
       currentPage: 1,
+      results: [],
+      page: 1,
       pageSize: 100,
       totalPages: 1,
       totalCount: 0
@@ -39,6 +43,13 @@ class Blogs extends Component {
       console.error(error)
     }
   }
+
+  handleSearch = async () => {
+    let {page, pageSize, title, content} = this.state
+    const response = await fetch(`https://admin.linlin.fun/api/v1/blogs/search?title=${title}&content=${content}&page=${page}&page_size=${pageSize}`);
+    const data = await response.json();
+    this.setState({results: data.results});
+  };
 
   handlePaginationChange = (page, pageSize) => {
     this.setState({ currentPage: page }, () => {
@@ -78,17 +89,45 @@ class Blogs extends Component {
           <div style={{ marginLeft: '20px'}} >
             <h1>琳琳的博客</h1>
             <p>博客总数: {totalCount}</p>
-            <div>
-
-              <Pagination
-                current={currentPage}
-                total={totalCount}
-                onChange={this.handlePaginationChange}
-                showSizeChanger={false}
-              />
-            </div>
+            标题:
+            <input
+              type="text"
+              value={this.state.title}
+              onChange={(e) => this.setState({ title: e.target.value })}
+              placeholder="例如 ssl"
+            />
+            内容:
+            <input
+              type="text"
+              value={this.state.content}
+              onChange={(e) => this.setState({ content: e.target.value })}
+              placeholder="例如 AWVS"
+            />
+            <button onClick={this.handleSearch}>搜索</button>
+            <Pagination
+              current={currentPage}
+              total={totalCount}
+              onChange={this.handlePaginationChange}
+              showSizeChanger={false}
+            />
           </div>
-          {data.map(item => (
+          <div>
+            {this.state.results.length > 2 && (
+              <>
+                <h2>查询结果：</h2>
+                {this.state.results.map((blog) => (
+                  <div key={blog.id} className="blog-list-title-simple">
+                    <Link className="a-link" target="_blank" to={`/blog/${blog.id}`}>
+                      {new Date(blog.created_at).toLocaleString().slice(0, -3).replace('/', '-').replace('/', '-')}
+                      {'   '}
+                      {blog.title}
+                    </Link>
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+          {this.state.results.length < 2 && data.map(item => (
             <div key={item.id} className="blog-list-title-simple">
               <Link className="a-link" target="_blank" to={`/blog/${item.id}`}>
                 {new Date(item.created_at).toLocaleString().slice(0, -3).replace('/', '-').replace('/', '-')}
