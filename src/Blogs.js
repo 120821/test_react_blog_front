@@ -16,6 +16,7 @@ class Blogs extends Component {
       results: [],
       page: 1,
       pageSize: 100,
+      loading: false,
       totalPages: 1,
       totalCount: 0
     };
@@ -49,6 +50,9 @@ class Blogs extends Component {
     const response = await fetch(`https://admin.linlin.fun/api/v1/blogs/search?title=${title}&content=${content}&page=${page}&page_size=${pageSize}`);
     const data = await response.json();
     this.setState({results: data.results});
+    this.setState({ loading: true });
+
+
   };
 
   handlePaginationChange = (page, pageSize) => {
@@ -79,7 +83,7 @@ class Blogs extends Component {
   };
 
   render() {
-    const { data, currentPage, totalCount } = this.state;
+    const { results, loading, data, currentPage, totalCount } = this.state;
 
     console.info("== data: ", data)
     return (
@@ -111,23 +115,27 @@ class Blogs extends Component {
               showSizeChanger={false}
             />
           </div>
-          <div>
-            {this.state.results.length > 2 && (
-              <>
+          <div style={{marginLeft: '20px'}}>
+            {loading === true ? (
+              <div>
                 <h2>查询结果：</h2>
-                {this.state.results.map((blog) => (
-                  <div key={blog.id} className="blog-list-title-simple">
-                    <Link className="a-link" target="_blank" to={`/blog/${blog.id}`}>
-                      {new Date(blog.created_at).toLocaleString().slice(0, -3).replace('/', '-').replace('/', '-')}
-                      {'   '}
-                      {blog.title}
-                    </Link>
-                  </div>
-                ))}
-              </>
-            )}
+                {results.length > 0 ? (
+                  results.map((blog) => (
+                    <div key={blog.id} className="blog-list-title-simple">
+                      <Link className="a-link" target="_blank" to={`/blog/${blog.id}`}>
+                        {new Date(blog.created_at).toLocaleString().slice(0, -3).replace('/', '-').replace('/', '-')}
+                        {'   '}
+                        {blog.title}
+                      </Link>
+                    </div>
+                  ))
+                ) : (
+                  <p>查询结果为空。</p>
+                )}
+              </div>
+            ) : null}
           </div>
-          {this.state.results.length < 2 && data.map(item => (
+          {results.length === 0 && loading === false && data.map(item => (
             <div key={item.id} className="blog-list-title-simple">
               <Link className="a-link" target="_blank" to={`/blog/${item.id}`}>
                 {new Date(item.created_at).toLocaleString().slice(0, -3).replace('/', '-').replace('/', '-')}
