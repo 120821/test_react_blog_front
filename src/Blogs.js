@@ -51,8 +51,16 @@ class Blogs extends Component {
     const data = await response.json();
     this.setState({results: data.results});
     this.setState({ loading: true });
+  };
 
-
+  handleClear = () => {
+    this.setState({
+      title: '',
+      content: '',
+      results: [],
+      loading: false,
+      currentPage: 1
+    });
   };
 
   handlePaginationChange = (page, pageSize) => {
@@ -93,21 +101,22 @@ class Blogs extends Component {
           <div style={{ marginLeft: '20px'}} >
             <h1>琳琳的博客</h1>
             <p>博客总数: {totalCount}</p>
-            标题:
+            <span style={{marginRight: '10px' }}>标题:</span>
             <input
               type="text"
               value={this.state.title}
               onChange={(e) => this.setState({ title: e.target.value })}
               placeholder="例如 ssl"
             />
-            内容:
+            <span style={{margin: '0 10px' }}>内容:</span>
             <input
               type="text"
               value={this.state.content}
               onChange={(e) => this.setState({ content: e.target.value })}
               placeholder="例如 AWVS"
             />
-            <button onClick={this.handleSearch}>搜索</button>
+            <button onClick={this.handleSearch} style={{marginLeft: '10px' }}>搜索</button>
+            <button onClick={this.handleClear} style={{marginLeft: '10px' }}>清除</button>
             <Pagination
               current={currentPage}
               total={totalCount}
