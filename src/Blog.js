@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-//import backgroundImage from './friends.jpeg';
-//import { Space, Button} from 'antd';
-//import { LeftSquareOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/default.css';
 import axios from 'axios';
 import RawHtmlComponent from './RawHtmlComponent';
 import './App.css';
@@ -19,7 +18,9 @@ class Blog extends Component {
     };
   }
   componentDidMount() {
-    this.fetchData()
+    this.fetchData();
+    hljs.initHighlightingOnLoad(); // 初始化highlight.js
+    hljs.highlightAll(); // 应用highlight.js的高亮效果
   }
   async fetchData() {
     console.info("======== fetchData")
@@ -41,7 +42,7 @@ class Blog extends Component {
             loading: false,
           },
           () => {
-            this.render();
+            hljs.highlightAll();
           }
         );
 
@@ -55,10 +56,6 @@ class Blog extends Component {
     window.location.href = newUrl
   };
 
-  //<Button onClick={() => this.handleShowClick()}>
-  //  <LeftSquareOutlined />
-  //   返回
-  //</Button>
   render() {
     const { title, content, created_at } = this.state;
 
