@@ -12,3 +12,12 @@ yarn add antd
 ```
 npm install axios
 ```
+### highlight.min.js
+```
+npm install highlight.js
+```
+or
+
+```
+yarn add highlight.js
+```
