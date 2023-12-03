@@ -49,7 +49,7 @@ class Blogs extends Component {
     let {page, pageSize, title, content} = this.state
     const response = await fetch(`https://admin.linlin.fun/api/v1/blogs/search?title=${title}&content=${content}&page=${page}&page_size=${pageSize}`);
     const data = await response.json();
-    this.setState({results: data.results});
+    this.setState({results: data.results, totalCount: data.total_count});
     this.setState({ loading: true });
   };
 
@@ -117,13 +117,13 @@ class Blogs extends Component {
             />
             <button onClick={this.handleSearch} style={{marginLeft: '10px' }}>搜索</button>
             <button onClick={this.handleClear} style={{marginLeft: '10px' }}>清除</button>
-            <Pagination
-              current={currentPage}
-              total={totalCount}
-              onChange={this.handlePaginationChange}
-              showSizeChanger={false}
-            />
           </div>
+          <Pagination
+            current={currentPage}
+            total={totalCount}
+            onChange={this.handlePaginationChange}
+            showSizeChanger={false}
+          />
           <div style={{marginLeft: '20px'}}>
             {loading === true ? (
               <div>
@@ -144,24 +144,26 @@ class Blogs extends Component {
               </div>
             ) : null}
           </div>
-          {results.length === 0 && loading === false && data.map(item => (
-            <div key={item.id} className="blog-list-title-simple">
-              <Link className="a-link" target="_blank" to={`/blog/${item.id}`}>
-                {new Date(item.created_at).toLocaleString().slice(0, -3).replace('/', '-').replace('/', '-')}
-                {'   '}
-                {item.title}
-              </Link>
-            </div>
-          ))}
-          <div>
+          {loading === false ? (
+            <>
+              {results.length === 0 && loading === false && data.map(item => (
+                <div key={item.id} className="blog-list-title-simple">
+                  <Link className="a-link" target="_blank" to={`/blog/${item.id}`}>
+                    {new Date(item.created_at).toLocaleString().slice(0, -3).replace('/', '-').replace('/', '-')}
+                    {'   '}
+                    {item.title}
+                  </Link>
+                </div>
+              ))}
+            </>
+          ) : null}
+          <Pagination
+            current={currentPage}
+            total={totalCount}
+            onChange={this.handlePaginationChange}
+            showSizeChanger={false}
+          />
 
-            <Pagination
-              current={currentPage}
-              total={totalCount}
-              onChange={this.handlePaginationChange}
-              showSizeChanger={false}
-            />
-          </div>
         </div>
 
       </div>
