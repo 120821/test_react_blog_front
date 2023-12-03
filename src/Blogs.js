@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Pagination } from 'antd';
+import { Input, Button, Pagination } from 'antd';
 import { Link } from 'react-router-dom';
 import BlogsCard from './BlogsCard';
 import axios from 'axios';
@@ -102,24 +102,31 @@ class Blogs extends Component {
             <h1>琳琳的博客</h1>
             <p>博客总数: {totalCount}</p>
             <span style={{marginRight: '10px' }}>标题:</span>
-            <input
+            <Input
               type="text"
               value={this.state.title}
+              style={{
+                width: 150,
+              }}
               onChange={(e) => this.setState({ title: e.target.value })}
               placeholder="例如 ssl"
             />
             <span style={{margin: '0 10px' }}>内容:</span>
-            <input
+            <Input
+              style={{
+                width: 150,
+              }}
               type="text"
               value={this.state.content}
               onChange={(e) => this.setState({ content: e.target.value })}
               placeholder="例如 AWVS"
             />
-            <button onClick={this.handleSearch} style={{marginLeft: '10px' }}>搜索</button>
-            <button onClick={this.handleClear} style={{marginLeft: '10px' }}>清除</button>
+            <Button onClick={this.handleSearch} style={{marginLeft: '10px' }}>搜索</Button>
+            <Button onClick={this.handleClear} style={{marginLeft: '10px' }}>清除</Button>
           </div>
           <Pagination
             current={currentPage}
+            style={{margin: '10px 0' }}
             total={totalCount}
             onChange={this.handlePaginationChange}
             showSizeChanger={false}
@@ -158,6 +165,7 @@ class Blogs extends Component {
             </>
           ) : null}
           <Pagination
+            style={{margin: '10px 0' }}
             current={currentPage}
             total={totalCount}
             onChange={this.handlePaginationChange}
