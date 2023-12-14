@@ -173,6 +173,9 @@ class Blogs extends Component {
           />
 
         </div>
+        <div className="footer">
+          <Link target="_blank" className="footer_link" to="https://beian.miit.gov.cn">豫ICP备2023034815号-2</Link>
+        </div>
 
       </div>
     );

@@ -6,7 +6,7 @@ import axios from 'axios';
 import RawHtmlComponent from './RawHtmlComponent';
 import './App.css';
 
-class Blog extends Component {
+class FilingInformation extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -60,23 +60,13 @@ class Blog extends Component {
     const { title, content, created_at } = this.state;
 
     return (
-      <>
-        <div className="blog-page">
-          <div className="show-blog">
-            <Link className="a-link" to="/">返回</Link>
-            <div className="title">{title}</div>
-            <div className="created_at">{created_at}</div>
-            <div className="content">
-              <RawHtmlComponent rawHtml={content} />
-            </div>
-          </div>
+      <div className="blog-page">
+        <div className="show-blog">
+          <Link className="a-link" to="https://beian.miit.gov.cn">豫ICP备2023034815号-2</Link>
         </div>
-        <div className="footer">
-          <Link target="_blank" className="footer_link" to="https://beian.miit.gov.cn">豫ICP备2023034815号-2</Link>
-        </div>
-      </>
+      </div>
     );
   }
 }
 
-export default Blog;
+export default FilingInformation;
