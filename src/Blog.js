@@ -4,6 +4,7 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css';
 import axios from 'axios';
 import RawHtmlComponent from './RawHtmlComponent';
+import FilingInformation from './FilingInformation';
 import './App.css';
 
 class Blog extends Component {
@@ -71,9 +72,7 @@ class Blog extends Component {
             </div>
           </div>
         </div>
-        <div className="footer">
-          <Link target="_blank" className="footer_link" to="https://beian.miit.gov.cn">豫ICP备2023034815号-2</Link>
-        </div>
+        <FilingInformation />
       </>
     );
   }

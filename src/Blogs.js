@@ -3,6 +3,7 @@ import { Input, Button, Pagination } from 'antd';
 import { Link } from 'react-router-dom';
 import BlogsCard from './BlogsCard';
 import axios from 'axios';
+import FilingInformation from './FilingInformation';
 import './App.css';
 
 class Blogs extends Component {
@@ -173,9 +174,7 @@ class Blogs extends Component {
           />
 
         </div>
-        <div className="footer">
-          <Link target="_blank" className="footer_link" to="https://beian.miit.gov.cn">豫ICP备2023034815号-2</Link>
-        </div>
+        <FilingInformation />
 
       </div>
     );
